@@ -29,4 +29,3 @@ Here we se:
 
 2. Button "Check amount" - logically, if u press it - code calculate the required amount of currency
 3. And after click button - result in "from-to; Amount; Currency" format (amount of USD -> 15.00 -> 13.02 -> EUR)
-
