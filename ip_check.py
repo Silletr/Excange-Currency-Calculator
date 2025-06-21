@@ -1,27 +1,37 @@
 import requests
 from logger_config import logger
 
-
 # main code
-class IpCheking:
+class IpChecking:
     def __init__(self):
-        self.url = "https://api.2ip.ua/geo.json?ip="
-        self.response = None
-        self.result = None
-
-    def fetch(self):
+        self.base_url = "https://api.2ip.io/"
+        self.logger = logger
+        
+    def fetch(self, ip_address=None):
         try:
-            self.response = requests.get(self.url)
-            self.response.raise_for_status()
-            self.result = self.response.json()
-            self.data = self.response.json()
-            self.result = self.data.get("ip")
-
-            logger.info(f"user ip: {self.data}")
-            return self.result
-
-        except requests.exceptions.httperror as e:
-            logger.error(f"http error: {e} (status {self.response.status_code})")
-
+            # If no IP provided, get current visitor's IP
+            if not ip_address:
+                endpoint = "info"
+            else:
+                endpoint = f"info?ip={ip_address}"
+                
+            url = f"{self.base_url}{endpoint}"
+            self.logger.debug(f"Making API request to: {url}")
+            
+            response = requests.get(url)
+            response.raise_for_status()
+            
+            data = response.json()
+            self.logger.info(f"API response received: {json.dumps(data, indent=2)}")
+            
+            return data
+            
+        except requests.exceptions.RequestException as e:
+            self.logger.error(f"Request error: {str(e)}")
+            raise
+        except json.JSONDecodeError as e:
+            self.logger.error(f"JSON decode error: {str(e)}")
+            raise
         except Exception as e:
-            logger.error(f"unexpected error: {e}")
+            self.logger.error(f"Unexpected error: {str(e)}")
+            raise
