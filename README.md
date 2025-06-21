@@ -1,7 +1,7 @@
 # Currencies Calculator
 
 
-**Currency Converter** (Or excanger, as u want) - thats [website](https://excange-currency.streamlit.app/) can help you to know how many u need give to bank for excange ur currency to nedeed
+**Currency Converter** (Or excanger, as u want) - thats [website](https://excange-currency-calculatorv1.streamlit.app/) can help you to know how many u need give to bank for excange ur currency to nedeed
 
 ---
 
