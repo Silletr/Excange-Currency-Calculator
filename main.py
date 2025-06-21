@@ -116,16 +116,27 @@ check_ip(user_ip)
 
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
-def convert_currency():
-    currencies, error = Currency.get_supported_currencies()
 
-    if error:
-        st.warning(
-            f"⚠️ Website may not work properly. API error: {error.replace('-', ' ')}"
-        )
-    # currencies
-    available_currencies = currencies if currencies else ["USD", "UAH", "RUB"]
-    # Choising currency
+
+def convert_currency():
+    # Get currencies and handle potential errors
+    result = Currency.get_supported_currencies()
+    
+    # Check if we got an error
+    if isinstance(result, tuple) and len(result) == 2:
+        currencies, error = result
+        if error:
+            st.warning(
+                f"⚠️ Website may not work properly. API error: {error.replace('-', ' ')}"
+            )
+            return
+    
+    currencies = result
+    
+    # Fallback to default currencies if none available
+    available_currencies = currencies if currencies else ["USD", "UAH", "EUR"]
+    
+    # Choosing currency
     from_currency = st.selectbox("From currency", available_currencies)
     to_currency_options = [
         curr for curr in available_currencies if curr != from_currency
@@ -137,7 +148,7 @@ def convert_currency():
         label="Enter amount", step=0.01, max_value=float(1_000_000_000)
     )
 
-    # Conversting currecies
+    # Converting currencies
     if st.button("Check amount"):
         currency = Currency()
         clean_amount = abs(amount)
@@ -148,9 +159,7 @@ def convert_currency():
             st.markdown(
                 f"### 💰 {clean_amount} {from_currency} = **{result:.2f} {to_currency}**"
             )
-
         else:
             st.error("Conversion failed.")
-
 
 convert_currency()
