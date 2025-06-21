@@ -3,25 +3,24 @@ from logger_config import logger
 
 
 # main code
-class IpCheking:
+class IpChecking:  # Fixed typo in class name
     def __init__(self):
         self.url = "https://api.2ip.ua/geo.json?ip="
         self.response = None
         self.result = None
 
-    def fetch(self):
+    def fetch(self, ip_address):
         try:
-            self.response = requests.get(self.url)
+            full_url = f"{self.url}{ip_address}"
+            self.response = requests.get(full_url)
             self.response.raise_for_status()
-            self.result = self.response.json()
             self.data = self.response.json()
-            self.result = self.data.get("ip")
-
-            logger.info(f"user ip: {self.data}")
-            return self.result
-
-        except requests.exceptions.httperror as e:
+            
+            logger.info(f"user ip details: {self.data}")
+            return self.data
+            
+        except requests.exceptions.HTTPError as e:
             logger.error(f"http error: {e} (status {self.response.status_code})")
-
+            
         except Exception as e:
             logger.error(f"unexpected error: {e}")
