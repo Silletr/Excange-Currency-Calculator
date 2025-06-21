@@ -13,8 +13,6 @@ logger.add(
     rotation="5 MB",
     retention="7 days",
     compression="zip",
-    format="""{time: DD-MM-YYYY at HH:mm} 
-        | {level} 
-        | {message}""",
+    format="""{time: DD-MM-YYYY at HH:mm} | {level} | {message}""",
     level="DEBUG",
 )
