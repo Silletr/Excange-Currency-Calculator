@@ -22,7 +22,8 @@ That's it! The converter will show how much you’ll get 🔁💰
 ![UI Screenshot](images/site_ui.png)
 
 Here we se:
-1. **3 Field**:
+1. 
+  **3 Field**:
    1. Choose first currency ("from currency", on this moment avaible 45 currencies)
    2. Choose second currency in second field ("to currency")
    3. And result - result of exchange currency (for example USD -> EUR)
