@@ -56,10 +56,6 @@ st.markdown(
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
 )
 
-"""
-My website dont working until 9th June, because my API quota was ended, 
-sorry for thats, and i`ll be wait you right here at designated date!
-"""
 
 #  -----------------------------------------------------------------------------------------
 # Main functional
