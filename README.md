@@ -9,9 +9,14 @@
 
 1. **Choose your currency** in the first dropdown
 
-2. **Choose the needed currency** in the second dropdown  
+2. **Choose the needed currency** in the second dropdown
    *(you can also just type it in if you don't wanna scroll)*
 
 3. **Enter the amount**, and hit **"Check amount"**
 
 That's it! The converter will show how much you’ll get 🔁💰
+
+
+---
+### 🖥 Website UI:
+![UI Screenshot](images/site_ui.png)
