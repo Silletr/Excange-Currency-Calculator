@@ -1,7 +1,0 @@
-__pycache__/
-logs/
-.env
-*.pyc
-ruff_reformat/
-ssh_git/
-.pre-commit-config.yaml
