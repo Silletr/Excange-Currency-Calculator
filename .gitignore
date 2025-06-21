@@ -1,0 +1,6 @@
+__pycache__/
+logs/
+.env
+*.pyc
+ruff_reformat/
+
