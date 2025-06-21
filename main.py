@@ -11,7 +11,6 @@ from streamlit_js_eval import streamlit_js_eval
 
 from logger_config import logger
 from currencies.parse import Currency
-from ip_check import IpChecking
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -46,7 +45,7 @@ def User_Agent():
         st.session_state["user_agent"] = user_agent
         logger.debug(f"User Agent: {user_agent}")
     else:
-        logger.debug("User Agent: User-Agent is missing. Maybe it`s a Bot.")
+        logger.debug("User-Agent is missing. Maybe it`s a Bot.")
 
 
 User_Agent()
@@ -68,43 +67,54 @@ component.html(
     """
     <script async src="//gc.zgo.at/count.js"
         data-goatcounter="https://silletr.goatcounter.com/count"
-        data-goatcounter-settings='{"allow_frame": true}'
-    >
+        data-goatcounter-settings='{"clicks": true, "allow_frame": true}'>
     </script>
-"""
+    """,
+    height=0,
 )
 
 
 #  -----------------------------------------------------------------------------------------
-# getting IP to check owner
-def ip_check(ip):
+# getting IP to check owner for access to log-file
+def ip_get():
+    ip = streamlit_js_eval(
+        js_expressions="""await (async () => {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                return data.ip || "127.0.0.1";
+            } catch (e) {
+                return "127.0.0.1";
+            }
+        })()""",
+        key="get-ip",
+    )
+
+    return ip
+
+
+# -----------------------------------------------------------------------------------------
+def check_ip(ip):
     if ip:
-        if os.getenv("OWNER_IP") == ip:
+        owner_ip = os.getenv("OWNER_IP")
+        if ip == owner_ip:
+            st.success("Hi, Silletr! Logs is done: ")
             if st.button("📜 Show logs"):
                 with open("logs/site_log.log", "r", encoding="utf-8") as f:
                     logs = f.read()
                 st.text_area("Log file", logs, height=350)
-
         else:
-            logger.info(f"User is with IP {ip} not Owner. \nAccess to logs: Denied")
+            logger.info(f"User with IP {ip} is not owner. Access denied.")
     else:
-        logger.error("Cant get user IP (its null or empty).")
+        logger.error("Can't get user IP (it's null or empty).")
 
 
-iP = streamlit_js_eval(
-    js_expressions="""await (async () => { 
-            const res = await fetch('https://api.ipify.org?format=json'); 
-            const data = await res.json(); 
-            return data.ip;
-            })()""",
-    key="get-ip",
-)
+user_ip = ip_get()
 
-# ip_check(iP)
-IpChecking(iP)
+check_ip(user_ip)
+
+
 # -----------------------------------------------------------------------------------------
-
-
 # Call func with all currencies
 def convert_currency():
     currencies, error = Currency.get_supported_currencies()
