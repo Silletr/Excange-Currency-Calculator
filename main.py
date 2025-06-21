@@ -75,92 +75,10 @@ component.html(
 
 
 #  -----------------------------------------------------------------------------------------
-# getting IP to check owner for access to log-file
-def ip_get():
-    js_code = """
-        async () => {
-            try {
-                // First attempt: get public IP
-                const res = await fetch('https://api.ipify.org?format=json');
-                const data = await res.json();
-            
-                // Send result back to Streamlit
-                window.parent.postMessage(data.ip || "127.0.0.1", "*");
-            
-            } catch (e) {
-                console.error('IPify failed:', e);
-            
-                // Fallback attempt: get local IP
-                try {
-                    const res = await fetch('https://api.ipgeolocation.io/ipgeo?');
-                    const data = await res.json();
-                    window.parent.postMessage(data.ip || "127.0.0.1", "*");
-                
-                } catch (e) {
-                    console.error('Fallback failed:', e);
-                    window.parent.postMessage("127.0.0.1", "*");
-                }
-            }
-        }()
-    """
-    
-    try:
-        ip = streamlit_js_eval(
-            js_expressions=js_code,
-            key="get-ip",
-            on_message=on_message
-        )
-        logger.info(f"Successfully retrieved IP: {ip}")
-        return ip
-
-    except Exception as e:
-        logger.error(f"Failed to get IP: {str(e)}")
-        return None
-
-# -----------------------------------------------------------------------------------------
-# Cheking the IP to owner
-def check_ip(ip):
-    if ip:
-        try:
-            # Initialize IP checker
-            checker = IpChecking()
-            
-            # Get detailed IP information
-            geo_data = checker.fetch(ip)
-            
-            owner_ip = os.getenv("OWNER_IP")
-            
-            if ip == owner_ip:
-                st.success("Hi, Silletr! Logs is done: ")
-                
-                if st.button("📜 Show logs"):
-                    try:
-                        with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                            logs = f.read()
-                        st.text_area("Log file", logs, height=350)
-                        
-                        # Display IP details
-                        st.write("\nIP Information:")
-                        st.json(geo_data)
-                        
-                    except FileNotFoundError:
-                        st.error("Log file not found")
-                    except Exception as e:
-                        st.error(f"Error reading log file: {str(e)}")
-            else:
-                logger.info(f"User with IP {ip} is not owner. Access denied.")
-                
-        except Exception as e:
-            logger.error(f"Failed to check IP: {str(e)}")
-    else:
-        logger.error("Can't get user IP (it's null or empty).")
-
-
-user_ip = ip_get()
-
-check_ip(user_ip)
-
-
+if st.button("📜 Show logs (for Owner)"):
+    with open("logs/site_log.log", "r", encoding="utf-8") as f:
+        logs = f.read()
+        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 
