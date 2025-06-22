@@ -69,17 +69,15 @@ component.html(
     height=0,
 )
 #  -----------------------------------------------------------------------------------------
-if st.button("Check logs (for owner)"):
-    st.success("Hi, sir. Logs is done. ")
-    if st.button("📜 Show logs"):
-        try:
-            with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                logs = f.read()
-            st.text_area("Log file", logs, height=350)
+if st.button("📜 Show logs"):
+    try:
+        with open("logs/site_log.log", "r", encoding="utf-8") as f:
+            logs = f.read()
+        st.text_area("Log file", logs, height=350)
 
-        except FileNotFoundError:
+    except FileNotFoundError:
             st.error("Log file not found")
-        except Exception as e:
+    except Exception as e:
             st.error(f"Error reading log file: {str(e)}")
 
 
