@@ -23,6 +23,9 @@ page_config = st.set_page_config(page_title="Currency Calculator", page_icon="ğŸ
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
 def enter_time():
+    """
+    Getting the time when user entered to the site and save to log file
+    """
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
     current_datetime = f"{current_datetime.hour:02}:{current_datetime.minute:02}"
@@ -32,10 +35,12 @@ def enter_time():
 enter_time()
 #  -----------------------------------------------------------------------------------------
 # Getting User-Agent of viewer (for separating bots and humans)
-# Using best method - if stremalit cant give UA (User Agent) - just replacing it to "User-Agent is missing"
-
 
 def User_Agent():
+    """
+    Taking the user agent for separate real user from bot,
+    if streamlit_js_eval cant get the user agent on some reasons just returning the "User Agent is unknown"
+    """
     # Taking user agent
     logger.info("Waiting for User-Agent")
     time.sleep(2)
@@ -48,7 +53,7 @@ def User_Agent():
         st.session_state["user_agent"] = user_agent
         logger.debug(f"User Agent: {user_agent}")
     else:
-        logger.debug("User-Agent is missing. Maybe it`s a Bot.")
+        logger.debug("User-Agent is unknown.")
 
 
 User_Agent()
@@ -85,6 +90,10 @@ if st.button("ğŸ“œ Show logs"):
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 def convert_currency():
+    """
+    converting currency using the Ukrainian National Bank (list of supported currencies: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json),
+    saving result of operation on logs file, and returning result to user on format "amount {from_curr} -> amount {to_curr}"
+    """
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
 
