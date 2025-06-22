@@ -124,18 +124,20 @@ def convert_currency():
     
     def log_user_agent():
         """
-        Placing User Agent to session state of streamlit and log it to logs file
+        Log user agent from session state when button is clicked
         """
-    logger.debug(f"User with {user_agent} - real user")
-    if 'user-agent' not in st.session_state:
-        st.session_state['user-agent'] = f"{user_agent}"
-
+        # Get user agent from session state
+        user_agent = st.session_state.get("user_agent", "Unknown")
+        logger.debug(f"User with {user_agent} - real user")
+    
+    get_user_agent()
     
     # Converting currencies
     if st.button("Check amount", on_click=log_user_agent):
         logger.debug(f"User with {user_agent} - real user")
         if 'user-agent' not in st.session_state:
             st.session_state['user-agent'] = f"{user_agent}"
+            
         currency = Currency()
         clean_amount = abs(amount)
         result = currency.convert(
@@ -151,9 +153,6 @@ def convert_currency():
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 convert_currency()
-
-# -----------------------------------------------------------------------------------------
-get_user_agent()
 # ------------------------------------------------------------------------------------------
 
 # # Donate (for the future, ~3 month)
