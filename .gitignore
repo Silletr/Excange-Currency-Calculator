@@ -1,5 +1,6 @@
 .env
 __pycache__/
+*.pyc
 currencies/__pycache__/
 logs/
 ruff_reformat/
