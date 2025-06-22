@@ -4,12 +4,18 @@ from logger_config import logger
 
 
 class Currency:
+    """
+    Class with all avaible on site currencies
+    """
     def __init__(self):
         self.supported_currencies = self.get_supported_currencies()
 
     @staticmethod
-    @st.cache_data(ttl=86400)
+    @st.cache_data(ttl=86400) # saving cache on 24h, then - again re-collect currencies
     def get_supported_currencies():
+        """
+        method who getting the all currencies from API (in my case - national ukrainian bank)
+        """
         url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
         try:
             response = requests.get(url)
@@ -30,7 +36,7 @@ class Currency:
             logger.critical(f"Critical error: {e}")
             return {}, str(e)
 
-    def convert(self, from_curr: str, to_curr: str, amount: int):
+    def convert(self, from_curr: str, to_curr: str, amount: float):
         if self.supported_currencies is None:
             st.error("Failed to fetch currency rates!")
             return None
@@ -43,11 +49,11 @@ class Currency:
             or to_curr not in self.supported_currencies
         ):
             logger.error("Unsupported currency.")
-            return None
+            return None   
 
         # Convert currency
-        amount_in_uah = amount * float(self.supported_currencies[from_curr])
-        result = amount_in_uah / float(self.supported_currencies[to_curr])
+        amount_in_uah: float = amount * float(self.supported_currencies[from_curr])
+        result: float = amount_in_uah / float(self.supported_currencies[to_curr])
 
         logger.debug(
             f"""Conversion details:
@@ -55,4 +61,4 @@ class Currency:
                In UAH: {amount_in_uah}
                Final {to_curr}: {result:.2f}"""
         )
-        return result
+        return result 
