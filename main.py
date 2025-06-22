@@ -2,11 +2,12 @@
 import datetime as dt
 import time
 
-
 import streamlit as st
 import streamlit.components.v1 as component
+
 import pytz
 from streamlit_js_eval import streamlit_js_eval
+
 
 from logger_config import logger
 from currencies.parse import Currency
