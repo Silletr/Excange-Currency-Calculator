@@ -5,7 +5,7 @@
 ---
 ## 💻 Website UI:
 ![UI Screenshot](images/site_ui.png)
-
+---
 Here we se:
 1. **3 Field**
 2. Choose first currency ("from currency", on this moment avaible 45 currencies)
