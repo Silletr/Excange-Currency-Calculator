@@ -2,7 +2,7 @@ import streamlit as st
 
 
 class Donate:
-""" Creating donate button with link to donate service """
+    """ Creating donate button with link to donate service """
     def __init__(self):
         self.donate_link = """
         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'>
