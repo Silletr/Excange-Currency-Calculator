@@ -69,20 +69,13 @@ component.html(
 
 
 #  -----------------------------------------------------------------------------------------
-if st.button("Check logs (for owner)"):
-            st.success("Hi, sir. Logs is done. ")
-            if st.button("📜 Show logs"):
-                try:
-                    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                        logs = f.read()
-                    st.text_area("Log file", logs, height=350)
-                    
-                except FileNotFoundError:
-                    st.error("Log file not found")
-                except Exception as e:
-                    st.error(f"Error reading log file: {str(e)}")
-        else:
-            logger.info(f"User with IP {ip} is not owner. Access denied.")
+"""
+logs for owner:
+"""
+if st.button("📜 Show logs"):
+    with open("logs/site_log.log", "r", encoding="utf-8") as f:
+        logs = f.read()
+        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 
