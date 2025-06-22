@@ -55,35 +55,6 @@ st.markdown(
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
     "(Link to the GitHub Repository)[https://github.com/Silletr/Excange-Currency-Calculator]"
 )
-
-
-#  -----------------------------------------------------------------------------------------
-# Donations (as desired)
-def donate():
-    # Create a container for the donation button
-    col1, col2 = st.columns([2, 1])
-
-    # Add text in the main column
-    col1.markdown(
-        """
-        If u want support me and mine project, give me a motivation to work -
-        you can send a little donation here:
-    """
-    )
-
-    # Add iframe in the side column
-    col2.markdown(
-        """
-        <iframe src='https://ko-fi.com/Y8Y51GUQWK?hideoutro=true&mobile=1'
-                style='border:none;height:350px;width:350px;'
-                frameborder='0' scrolling='no'>
-        </iframe>
-    """,
-        unsafe_allow_html=True,
-    )
-
-
-donate()
 #  -----------------------------------------------------------------------------------------
 # Main functional
 component.html(
@@ -95,7 +66,6 @@ component.html(
     """,
     height=0,
 )
-
 #  -----------------------------------------------------------------------------------------
 if st.button("Check logs (for owner)"):
     st.success("Hi, sir. Logs is done. ")
