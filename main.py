@@ -15,12 +15,6 @@ from currencies.parse import Currency
 # Page config and loading dotenv
 
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
-dotenv.load_dotenv()
-
-# --------------------------------------------------------------------------------
-st.markdown("""
-<meta name="google-site-verification" content="Mede6ov4PbPWLB17ZvsgRqNbdABISgD4j3q_XhuXLaI">
-""", unsafe_allow_html=True)
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
