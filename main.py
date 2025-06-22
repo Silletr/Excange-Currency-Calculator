@@ -61,6 +61,35 @@ My website dont working until 9th June, because my API quota was ended,
 sorry for thats, and i`ll be wait you right here at designated date!
 """
 
+
+#  -----------------------------------------------------------------------------------------
+# Donations (as desired)
+def donate():
+    # Create a container for the donation button
+    col1, col2 = st.columns([2, 1])
+
+    # Add text in the main column
+    col1.markdown(
+        """
+        If u want support me and mine project, give me a motivation to work - 
+        you can send a little donation here:
+    """
+    )
+
+    # Add iframe in the side column
+    col2.markdown(
+        """
+        <iframe src='https://ko-fi.com/Y8Y51GUQWK?hideoutro=true&mobile=1'
+                style='border:none;height:350px;width:350px;'
+                frameborder='0' scrolling='no'>
+        </iframe>
+    """,
+        unsafe_allow_html=True,
+    )
+
+
+donate()
+
 #  -----------------------------------------------------------------------------------------
 # Main functional
 component.html(
