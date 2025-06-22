@@ -47,7 +47,7 @@ def User_Agent():
     global user_agent
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
-    )
+    ) -> str
 
     if user_agent and isinstance(user_agent, str):
         st.session_state["user_agent"] = user_agent
