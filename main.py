@@ -2,7 +2,7 @@
 import datetime as dt
 import time
 
-import dotenv
+
 import streamlit as st
 import streamlit.components.v1 as component
 import pytz
@@ -15,8 +15,6 @@ from currencies.parse import Currency
 # Page config and loading dotenv
 
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
-dotenv.load_dotenv()
-
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
@@ -55,41 +53,6 @@ st.markdown(
     "**Want know how much you need give to the bank for needed amount of currency?** "
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
 )
-
-"""
-My website dont working until 9th June, because my API quota was ended,
-sorry for thats, and i`ll be wait you right here at designated date!
-"""
-
-
-#  -----------------------------------------------------------------------------------------
-# Donations (as desired)
-def donate():
-    # Create a container for the donation button
-    col1, col2 = st.columns([2, 1])
-
-    # Add text in the main column
-    col1.markdown(
-        """
-        If u want support me and mine project, give me a motivation to work - 
-        you can send a little donation here:
-    """
-    )
-
-    # Add iframe in the side column
-    col2.markdown(
-        """
-        <iframe src='https://ko-fi.com/Y8Y51GUQWK?hideoutro=true&mobile=1'
-                style='border:none;height:350px;width:350px;'
-                frameborder='0' scrolling='no'>
-        </iframe>
-    """,
-        unsafe_allow_html=True,
-    )
-
-
-donate()
-
 #  -----------------------------------------------------------------------------------------
 # Main functional
 component.html(
@@ -102,9 +65,11 @@ component.html(
     height=0,
 )
 
-
 #  -----------------------------------------------------------------------------------------
-if st.button("📜 Show logs (for Owner)"):
+"""
+logs for owner:
+"""
+if st.button("📜 Show logs"):
     with open("logs/site_log.log", "r", encoding="utf-8") as f:
         logs = f.read()
         st.text_area("Log file", logs, height=350)
