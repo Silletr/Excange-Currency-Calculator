@@ -75,6 +75,9 @@ component.html(
 
 
 #  -----------------------------------------------------------------------------------------
+"""
+logs for owner:
+"""
 st.success("Hi, sir. Logs is done. ")
 if st.button("📜 Show logs"):
     with open("logs/site_log.log", "r", encoding="utf-8") as f:
