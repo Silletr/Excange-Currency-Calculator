@@ -41,7 +41,7 @@ def get_user_agent():
     if streamlit_js_eval cant get the user agent on some reasons just returning the "User Agent is unknown"
     """
     logger.info("Waiting for User-Agent")
-    time.sleep(2)
+    time.sleep(4)
     
     # Store directly in session state
     user_agent = streamlit_js_eval(
