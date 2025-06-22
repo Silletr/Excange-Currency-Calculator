@@ -75,61 +75,11 @@ component.html(
 
 
 #  -----------------------------------------------------------------------------------------
-# getting IP to check owner for access to log-file
-def ip_get():
-    ip = streamlit_js_eval(
-        js_expressions="""
-            async () => {
-                try {
-                    const res = await fetch('https://api.ipify.org?format=json');
-                    const data = await res.json();
-                    window.parent.postMessage(data.ip || "127.0.0.1", "*");
-                } catch (e) {
-                    window.parent.postMessage("127.0.0.1", "*");
-                }
-            }()
-        """,
-        key="get-ip",
-    )
-
-    return ip
-
-# -----------------------------------------------------------------------------------------
-def check_ip(ip):
-    if ip:
-        owner_ip = os.getenv("OWNER_IP")
-        
-        # Get geolocation data
-        checker = IpChecking()
-        geo_data = checker.fetch(ip)
-        
-        if ip == owner_ip:
-            st.success("Hi, sir. Logs is done. ")
-            if st.button("📜 Show logs"):
-                try:
-                    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                        logs = f.read()
-                    st.text_area("Log file", logs, height=350)
-                except FileNotFoundError:
-                    st.error("Log file not found")
-                except Exception as e:
-                    st.error(f"Error reading log file: {str(e)}")
-        else:
-            logger.info(f"User with IP {ip} is not owner. Access denied.")
-            
-        # Display geolocation data
-        if geo_data:
-            st.write("Geolocation Data:")
-            st.json(geo_data)
-    else:
-        logger.error("Can't get user IP (it's null or empty).")
-
-
-user_ip = ip_get()
-
-check_ip(user_ip)
-
-
+st.success("Hi, sir. Logs is done. ")
+if st.button("📜 Show logs"):
+    with open("logs/site_log.log", "r", encoding="utf-8") as f:
+        logs = f.read()
+        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 
