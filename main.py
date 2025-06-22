@@ -10,7 +10,8 @@ from streamlit_js_eval import streamlit_js_eval
 
 from logger_config import logger
 from currencies.parse import Currency
-
+from excange import convert_currency
+from donate import Donate
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -75,8 +76,4 @@ if st.button("📜 Show logs"):
         st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
-
-
-
-
 convert_currency()
