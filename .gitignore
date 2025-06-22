@@ -1,0 +1,6 @@
+.env
+__pycache__/
+currencies/__pycache__/
+ruff_reformat/
+ssh_git/
+logs/
