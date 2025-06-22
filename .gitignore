@@ -4,4 +4,3 @@ currencies/__pycache__/
 logs/
 ruff_reformat/
 ssh_git/
-test.py
