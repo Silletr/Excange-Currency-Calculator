@@ -39,6 +39,7 @@ def User_Agent():
     # Taking user agent
     logger.info("Waiting for User-Agent")
     time.sleep(2)
+    global user_agent
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
     )
@@ -115,6 +116,7 @@ def convert_currency():
 
     # Converting currencies
     if st.button("Check amount"):
+        logger.debug(f"User with {user_agent}")
         currency = Currency()
         clean_amount = abs(amount)
         result = currency.convert(
