@@ -35,25 +35,26 @@ def enter_time():
 enter_time()
 #  -----------------------------------------------------------------------------------------
 # Getting User-Agent of viewer (for separating bots and humans)
-
-def User_Agent():
+def get_user_agent():
     """
     Taking the user agent for separate real user from bot,
     if streamlit_js_eval cant get the user agent on some reasons just returning the "User Agent is unknown"
     """
-    # Taking user agent
     logger.info("Waiting for User-Agent")
     time.sleep(2)
-    global user_agent
-    user_agent: str = streamlit_js_eval(
-        js_expressions="navigator.userAgent", key="getUserAgent"
+    
+    # Store directly in session state
+    user_agent = streamlit_js_eval(
+        js_expressions="navigator.userAgent", 
+        key="getUserAgent"
     )
-
+    
     if user_agent and isinstance(user_agent, str):
         st.session_state["user_agent"] = user_agent
         logger.debug(f"User Agent: {user_agent}")
     else:
         logger.debug("User-Agent is unknown.")
+        st.session_state["user_agent"] = "Unknown"
 
 
 User_Agent()
