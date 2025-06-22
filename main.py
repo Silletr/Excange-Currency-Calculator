@@ -1,6 +1,5 @@
 # Imports
 import datetime as dt
-import os
 import time
 
 
@@ -11,6 +10,7 @@ from streamlit_js_eval import streamlit_js_eval
 
 from logger_config import logger
 from currencies.parse import Currency
+
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -33,8 +33,8 @@ enter_time()
 
 def User_Agent():
     # Taking user agent
-    logger.warning("Waiting for User-Agent")
-    time.sleep(1.5)
+    logger.info("Waiting for User-Agent")
+    time.sleep(2)
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
     )
@@ -52,9 +52,7 @@ User_Agent()
 st.markdown(
     "**Want know how much you need give to the bank for needed amount of currency?** "
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
-    "(Link to the GitHub Repository)[https://github.com/Silletr/Excange-Currency-Calculator]"
 )
-
 #  -----------------------------------------------------------------------------------------
 # Main functional
 component.html(
@@ -66,7 +64,6 @@ component.html(
     """,
     height=0,
 )
-
 
 #  -----------------------------------------------------------------------------------------
 """
@@ -83,7 +80,7 @@ if st.button("📜 Show logs"):
 def convert_currency():
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
-    
+
     # Check if we got an error
     if isinstance(result, tuple) and len(result) == 2:
         currencies, error = result
@@ -92,12 +89,12 @@ def convert_currency():
                 f"⚠️ Website may not work properly. API error: {error.replace('-', ' ')}"
             )
             return
-    
+
     currencies = result
-    
+
     # Fallback to default currencies if none available
     available_currencies = currencies if currencies else ["USD", "UAH", "EUR"]
-    
+
     # Choosing currency
     from_currency = st.selectbox("From currency", available_currencies)
     to_currency_options = [
@@ -123,5 +120,6 @@ def convert_currency():
             )
         else:
             st.error("Conversion failed.")
+
 
 convert_currency()
