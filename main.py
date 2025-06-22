@@ -1,6 +1,5 @@
 # Imports
 import datetime as dt
-import os
 import time
 
 
@@ -9,12 +8,15 @@ import streamlit.components.v1 as component
 import pytz
 from streamlit_js_eval import streamlit_js_eval
 
+from donate import Donate
 from logger_config import logger
 from currencies.parse import Currency
+
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
+
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
@@ -70,19 +72,17 @@ component.html(
 
 #  -----------------------------------------------------------------------------------------
 if st.button("Check logs (for owner)"):
-            st.success("Hi, sir. Logs is done. ")
-            if st.button("📜 Show logs"):
-                try:
-                    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                        logs = f.read()
-                    st.text_area("Log file", logs, height=350)
-                    
-                except FileNotFoundError:
-                    st.error("Log file not found")
-                except Exception as e:
-                    st.error(f"Error reading log file: {str(e)}")
-        else:
-            logger.info(f"User with IP {ip} is not owner. Access denied.")
+    st.success("Hi, sir. Logs is done. ")
+    if st.button("📜 Show logs"):
+        try:
+            with open("logs/site_log.log", "r", encoding="utf-8") as f:
+                logs = f.read()
+            st.text_area("Log file", logs, height=350)
+
+        except FileNotFoundError:
+            st.error("Log file not found")
+        except Exception as e:
+            st.error(f"Error reading log file: {str(e)}")
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 
@@ -90,7 +90,7 @@ if st.button("Check logs (for owner)"):
 def convert_currency():
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
-    
+
     # Check if we got an error
     if isinstance(result, tuple) and len(result) == 2:
         currencies, error = result
@@ -99,12 +99,12 @@ def convert_currency():
                 f"⚠️ Website may not work properly. API error: {error.replace('-', ' ')}"
             )
             return
-    
+
     currencies = result
-    
+
     # Fallback to default currencies if none available
     available_currencies = currencies if currencies else ["USD", "UAH", "EUR"]
-    
+
     # Choosing currency
     from_currency = st.selectbox("From currency", available_currencies)
     to_currency_options = [
@@ -131,4 +131,8 @@ def convert_currency():
         else:
             st.error("Conversion failed.")
 
+
 convert_currency()
+# -----------------------------------------------------------------------------------------
+don = Donate()
+don.donate()
