@@ -45,9 +45,9 @@ def User_Agent():
     logger.info("Waiting for User-Agent")
     time.sleep(2)
     global user_agent
-    user_agent = streamlit_js_eval(
+    user_agent: str = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
-    ) -> str
+    )
 
     if user_agent and isinstance(user_agent, str):
         st.session_state["user_agent"] = user_agent
