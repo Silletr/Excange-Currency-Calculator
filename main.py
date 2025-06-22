@@ -130,6 +130,6 @@ def convert_currency():
 # Call func with all currencies
 convert_currency()
 # ------------------------------------------------------------------------------------------
-# Donate (for the future, ~3 month)
-don = Donate()
-don.donate()
+# # Donate (for the future, ~3 month)
+# don = Donate()
+# don.donate()
