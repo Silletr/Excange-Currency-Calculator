@@ -16,21 +16,7 @@
 
 That's it! The converter will show how much you’ll get 🔁💰
 
-
 ---
-### 🖥 Website UI:
-![UI Screenshot](images/site_ui.png)
-
-Here we se:
-1. **3 Field**:
-   1. Choose first currency ("from currency", on this moment avaible 45 currencies)
-   2. Choose second currency in second field ("to currency")
-   3. And result - result of exchange currency (for example USD -> EUR)
-
-2. Button "Check amount" - logically, if u press it - code calculate the required amount of currency
-3. And after click button - result in "from-to; Amount; Currency" format (amount of USD -> 15.00 -> 13.02 -> EUR)
----
-
 ## 💻 Website UI:
 ![UI Screenshot](images/site_ui.png)
 ---
