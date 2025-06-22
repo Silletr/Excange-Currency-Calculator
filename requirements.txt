@@ -4,4 +4,5 @@ dotenv
 loguru
 pytz
 streamlit-js-eval
-twoip
+# for streamlit upgrade pip
+pip

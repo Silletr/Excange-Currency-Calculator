@@ -11,6 +11,8 @@ from streamlit_js_eval import streamlit_js_eval
 from logger_config import logger
 from currencies.parse import Currency
 
+from donate import Donate
+
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -34,8 +36,8 @@ enter_time()
 
 def User_Agent():
     # Taking user agent
-    logger.warning("Waiting for User-Agent")
-    time.sleep(1.5)
+    logger.info("Waiting for User-Agent")
+    time.sleep(2)
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
     )
@@ -53,7 +55,6 @@ User_Agent()
 st.markdown(
     "**Want know how much you need give to the bank for needed amount of currency?** "
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
-    "(Link to the GitHub Repository)[https://github.com/Silletr/Excange-Currency-Calculator]"
 )
 #  -----------------------------------------------------------------------------------------
 # Main functional
@@ -128,4 +129,18 @@ def convert_currency():
             st.error("Conversion failed.")
 
 
+#  -----------------------------------------------------------------------------------------
+"""
+logs for owner:
+"""
+if st.button("📜 Show logs"):
+    with open("logs/site_log.log", "r", encoding="utf-8") as f:
+        logs = f.read()
+        st.text_area("Log file", logs, height=350)
+# -----------------------------------------------------------------------------------------
+# Call func with all currencies
 convert_currency()
+# ------------------------------------------------------------------------------------------
+# Donate (for the future, ~3 month)
+don = Donate()
+don.donate()
