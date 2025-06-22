@@ -8,7 +8,6 @@ import streamlit.components.v1 as component
 import pytz
 from streamlit_js_eval import streamlit_js_eval
 
-from donate import Donate
 from logger_config import logger
 from currencies.parse import Currency
 
@@ -57,6 +56,34 @@ st.markdown(
     "(Link to the GitHub Repository)[https://github.com/Silletr/Excange-Currency-Calculator]"
 )
 
+
+#  -----------------------------------------------------------------------------------------
+# Donations (as desired)
+def donate():
+    # Create a container for the donation button
+    col1, col2 = st.columns([2, 1])
+
+    # Add text in the main column
+    col1.markdown(
+        """
+        If u want support me and mine project, give me a motivation to work -
+        you can send a little donation here:
+    """
+    )
+
+    # Add iframe in the side column
+    col2.markdown(
+        """
+        <iframe src='https://ko-fi.com/Y8Y51GUQWK?hideoutro=true&mobile=1'
+                style='border:none;height:350px;width:350px;'
+                frameborder='0' scrolling='no'>
+        </iframe>
+    """,
+        unsafe_allow_html=True,
+    )
+
+
+donate()
 #  -----------------------------------------------------------------------------------------
 # Main functional
 component.html(
@@ -68,7 +95,6 @@ component.html(
     """,
     height=0,
 )
-
 
 #  -----------------------------------------------------------------------------------------
 if st.button("Check logs (for owner)"):
@@ -83,10 +109,10 @@ if st.button("Check logs (for owner)"):
             st.error("Log file not found")
         except Exception as e:
             st.error(f"Error reading log file: {str(e)}")
+
+
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
-
-
 def convert_currency():
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
@@ -133,6 +159,3 @@ def convert_currency():
 
 
 convert_currency()
-# -----------------------------------------------------------------------------------------
-don = Donate()
-don.donate()
