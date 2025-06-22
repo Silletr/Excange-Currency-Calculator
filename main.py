@@ -44,6 +44,7 @@ def get_user_agent():
     time.sleep(4)
     
     # Store directly in session state
+    global user_agent
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", 
         key="getUserAgent"
@@ -56,6 +57,8 @@ def get_user_agent():
         logger.debug("User-Agent is unknown.")
         st.session_state["user_agent"] = "Unknown"
 
+
+get_user_agent()
 #  -----------------------------------------------------------------------------------------
 # Greetings
 st.markdown(
@@ -130,7 +133,7 @@ def convert_currency():
         user_agent = st.session_state.get("user_agent", "Unknown")
         logger.debug(f"User with {user_agent} - real user")
     
-    get_user_agent()
+    
     
     # Converting currencies
     if st.button("Check amount", on_click=log_user_agent):
