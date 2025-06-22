@@ -56,8 +56,6 @@ def get_user_agent():
         logger.debug("User-Agent is unknown.")
         st.session_state["user_agent"] = "Unknown"
 
-
-User_Agent()
 #  -----------------------------------------------------------------------------------------
 # Greetings
 st.markdown(
@@ -149,10 +147,15 @@ def convert_currency():
             )
         else:
             st.error("Conversion failed.")
+
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 convert_currency()
+
+# -----------------------------------------------------------------------------------------
+get_user_agent()
 # ------------------------------------------------------------------------------------------
+
 # # Donate (for the future, ~3 month)
 # don = Donate()
 # don.donate()
