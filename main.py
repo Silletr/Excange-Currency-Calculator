@@ -126,16 +126,6 @@ def convert_currency():
             )
         else:
             st.error("Conversion failed.")
-
-
-#  -----------------------------------------------------------------------------------------
-"""
-logs for owner:
-"""
-if st.button("📜 Show logs"):
-    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-        logs = f.read()
-        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 convert_currency()
