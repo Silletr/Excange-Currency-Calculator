@@ -3,7 +3,7 @@ import datetime as dt
 import os
 import time
 
-import dotenv
+
 import streamlit as st
 import streamlit.components.v1 as component
 import pytz
@@ -52,8 +52,8 @@ User_Agent()
 st.markdown(
     "**Want know how much you need give to the bank for needed amount of currency?** "
     "Calculate this on my Currency-Calculator! Just select amount, two currencies and that's all!"
+    "(Link to the GitHub Repository)[https://github.com/Silletr/Excange-Currency-Calculator]"
 )
-
 
 #  -----------------------------------------------------------------------------------------
 # Main functional
