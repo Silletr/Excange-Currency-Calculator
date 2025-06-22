@@ -11,10 +11,13 @@ from streamlit_js_eval import streamlit_js_eval
 from logger_config import logger
 from currencies.parse import Currency
 
+from donate import Donate
+
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
+
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
@@ -64,19 +67,23 @@ component.html(
     """,
     height=0,
 )
-
 #  -----------------------------------------------------------------------------------------
-"""
-logs for owner:
-"""
-if st.button("📜 Show logs"):
-    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-        logs = f.read()
-        st.text_area("Log file", logs, height=350)
+if st.button("Check logs (for owner)"):
+    st.success("Hi, sir. Logs is done. ")
+    if st.button("📜 Show logs"):
+        try:
+            with open("logs/site_log.log", "r", encoding="utf-8") as f:
+                logs = f.read()
+            st.text_area("Log file", logs, height=350)
+
+        except FileNotFoundError:
+            st.error("Log file not found")
+        except Exception as e:
+            st.error(f"Error reading log file: {str(e)}")
+
+
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
-
-
 def convert_currency():
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
@@ -122,4 +129,18 @@ def convert_currency():
             st.error("Conversion failed.")
 
 
+#  -----------------------------------------------------------------------------------------
+"""
+logs for owner:
+"""
+if st.button("📜 Show logs"):
+    with open("logs/site_log.log", "r", encoding="utf-8") as f:
+        logs = f.read()
+        st.text_area("Log file", logs, height=350)
+# -----------------------------------------------------------------------------------------
+# Call func with all currencies
 convert_currency()
+# ------------------------------------------------------------------------------------------
+# Donate (for the future, ~3 month)
+don = Donate()
+don.donate()

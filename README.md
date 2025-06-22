@@ -16,7 +16,6 @@
 
 That's it! The converter will show how much you’ll get 🔁💰
 ---
-
 ## 💻 Website UI:
 ![UI Screenshot](images/site_ui.png)
 ---
