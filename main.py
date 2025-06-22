@@ -122,10 +122,21 @@ def convert_currency():
     amount = st.number_input(
         label="Enter amount", step=0.01, max_value=float(1_000_000_000)
     )
+    
+    def log_user_agent():
+        """
+        Placing User Agent to session state of streamlit and log it to logs file
+        """
+    logger.debug(f"User with {user_agent} - real user")
+    if 'user-agent' not in st.session_state:
+        st.session_state['user-agent'] = f"{user_agent}"
 
+    
     # Converting currencies
-    if st.button("Check amount"):
-        logger.debug(f"User with {user_agent}")
+    if st.button("Check amount", on_click=log_user_agent):
+        logger.debug(f"User with {user_agent} - real user")
+        if 'user-agent' not in st.session_state:
+            st.session_state['user-agent'] = f"{user_agent}"
         currency = Currency()
         clean_amount = abs(amount)
         result = currency.convert(
