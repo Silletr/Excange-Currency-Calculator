@@ -98,7 +98,7 @@ if st.button("📜 Show logs"):
     if st.button("Close logs"):
         st.session_state.show_logs = False
 
---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 # Call func with all currencies
 def convert_currency():
     """
