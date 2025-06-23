@@ -38,7 +38,7 @@ component.html(
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
-@st.cache_resource
+@st.cache_data(ttl=86400)
 def enter_time():
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
@@ -52,7 +52,7 @@ enter_time()
 
 #  -----------------------------------------------------------------------------------------
 # Getting User-Agent of viewer (for separating bots and humans)
-@st.cache_resourse
+@st.cache_data(ttl=86400)
 def get_user_agent():
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
@@ -97,7 +97,7 @@ if st.session_state.show_logs:
 
 # --------------------------------------------------------------------------------------
 # Currency logic
-@st.cache_resource
+@st.cache_data(ttl=86400)
 def get_currency():
     return Currency()
 
