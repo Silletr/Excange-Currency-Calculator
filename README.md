@@ -47,7 +47,7 @@ What you see:
 
 ## 🛠 Tech Stack
 
-- Python 3.10+
+- Python 3.11+
 - Streamlit
 - `black`, `ruff`, `detect-secrets`, `pre-commit`
 - Modular code
