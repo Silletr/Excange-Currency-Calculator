@@ -12,11 +12,15 @@ from streamlit_js_eval import streamlit_js_eval
 from logger_config import logger
 from currencies.parse import Currency
 
-# from donate import Donate  
-# TODO: 
-# 1. Add Donate button (3 months later, 08/23/2025)
-# 2. Optimizate code for better UX
+# from donate import Donate
 
+# TODO: See detailed tasks below
+"""
+    1. Add Donate button (at: 08/23/2025)
+    2. Optimizate code for better UX
+FIXME:
+    1. ...
+"""
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -36,6 +40,8 @@ def enter_time():
 
 
 enter_time()
+
+
 #  -----------------------------------------------------------------------------------------
 # Getting User-Agent of viewer (for separating bots and humans)
 def get_user_agent():
@@ -45,14 +51,13 @@ def get_user_agent():
     """
     logger.info("Waiting for User-Agent")
     time.sleep(2.5)
-    
+
     # Store directly in session state
     global user_agent
     user_agent = streamlit_js_eval(
-        js_expressions="navigator.userAgent", 
-        key="getUserAgent"
+        js_expressions="navigator.userAgent", key="getUserAgent"
     )
-    
+
     if user_agent and isinstance(user_agent, str):
         st.session_state["user_agent"] = user_agent
         logger.debug(f"User Agent: {user_agent}")
@@ -87,9 +92,9 @@ if st.button("📜 Show logs"):
         st.text_area("Log file", logs, height=350)
 
     except FileNotFoundError:
-            st.error("Log file not found")
+        st.error("Log file not found")
     except Exception as e:
-            st.error(f"Error reading log file: {str(e)}")
+        st.error(f"Error reading log file: {str(e)}")
 
 
 # -----------------------------------------------------------------------------------------
@@ -127,7 +132,7 @@ def convert_currency():
     amount = st.number_input(
         label="Enter amount", step=0.01, max_value=float(1_000_000_000)
     )
-    
+
     def log_user_agent():
         """
         Log user agent from session state when button is clicked
@@ -135,15 +140,13 @@ def convert_currency():
         # Get user agent from session state
         user_agent = st.session_state.get("user_agent", "Unknown")
         logger.debug(f"User with {user_agent} - real user")
-    
-    
-    
+
     # Converting currencies
     if st.button("Check amount", on_click=log_user_agent):
         logger.debug(f"User with {user_agent} - real user")
-        if 'user-agent' not in st.session_state:
-            st.session_state['user-agent'] = f"{user_agent}"
-            
+        if "user-agent" not in st.session_state:
+            st.session_state["user-agent"] = f"{user_agent}"
+
         currency = Currency()
         clean_amount = abs(amount)
         result = currency.convert(
@@ -155,6 +158,7 @@ def convert_currency():
             )
         else:
             st.error("Conversion failed.")
+
 
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
