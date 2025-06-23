@@ -32,9 +32,8 @@ def main():
 
     # starting streamlit
     os.environ["PATH"] += os.pathsep + os.path.expanduser("~/.local/bin")
-    path_to_st = os.environ["PATH"]
     print("[INFO] Launching Streamlit app...")
-    run_command(f"{path_to_st}", cwd=REPO_DIR)
+    run_command("streamlit run main.py", cwd=REPO_DIR)
 
 
 if __name__ == "__main__":
