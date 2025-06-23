@@ -66,8 +66,11 @@ What you see:
 ## 👷 For Developers
 
 Wanna run it locally?
-Just:
-1. **Download the "setup_n_run.py", requirements.txt file**
-2. **Start "pip install -r requirements.txt"**
-3. **After downloading - start "python3 setup_n_run"**
-Before you can press the Shift + C, and go to "Exchange-Currency-Calculator" - from here start main.py (if u on Windows - u can create the icon with path to main.py file and start from Desktop) 
+Just follow these steps:
+1. **Download the "setup_n_run.py" and requirements.txt**
+2. **Run "pip install -r requirements.txt"**
+3. **After that, run the app with: python3 setup_n_run**
+---
+Optional:
+**Before launching u can press Shift + C and go to the Excange-Currency-Calculator folder. From there **you can also start main.py** directly.
+On Windows, feel free to **create a shortcut to main.py on your Desktop** for faster access
