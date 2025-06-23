@@ -8,11 +8,12 @@ import streamlit.components.v1 as component
 from logger_config import logger
 from currencies.parse import Currency
 
-# from donate import Donate
 
-# TODO: See detailed tasks below
+# Tasks:
 #   1. Add Donate button (at: 08/23/2025)
 #   2. Optimizate code for better UX
+# Done:
+# - [x] Optimizate code for better UX
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
