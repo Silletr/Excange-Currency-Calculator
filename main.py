@@ -1,6 +1,8 @@
 # Imports
 import datetime as dt
 import streamlit as st
+import time 
+
 
 import pytz
 from streamlit_js_eval import streamlit_js_eval
@@ -57,7 +59,7 @@ def get_user_agent():
     """
     if "user_agent" not in st.session_state or st.session_state["user_agent"] is None:
         ua = streamlit_js_eval(js_expressions="navigator.userAgent", key="getUserAgent")
-        
+        time.sleep(1.5)
         st.session_state["user_agent"] = ua or "Unknown"
         logger.debug(f"User Agent: {st.session_state['user_agent']}")
         
