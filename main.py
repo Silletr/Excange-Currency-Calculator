@@ -93,9 +93,6 @@ if st.button("📜 Show logs"):
         st.error(f"Error reading log file: {str(e)}")
     if st.button("Close logs"):
         st.session_state.show_logs = False
-    if st.button("Close logs"):
-        st.session_state.show_logs = False
-
 
 # --------------------------------------------------------------------------------------
 # Call func with all currencies
