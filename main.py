@@ -73,16 +73,18 @@ def toggle_logs():
 
 toggle_logs()
 
-st.button(
+if st.button(
     "📜 Show logs" if not st.session_state.show_logs else "📕 Hide logs",
-    on_click=toggle_logs,
-)
+):
+    st.session_state.show_logs = not st.session_state.show_logs
+    st.rerun()
+
 
 if st.session_state.show_logs:
     try:
         with open("logs/site_log.log", "r", encoding="utf-8") as f:
             logs = f.readlines()
-        logs_to_show = "".join(logs[-300:])
+        logs_to_show = "".join(logs[-300:])  # last 300 strings
         st.text_area("Log file (last 300 lines)", logs_to_show, height=350)
     except FileNotFoundError:
         st.error("Log file not found")
