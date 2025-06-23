@@ -73,3 +73,4 @@ cd Excange-Currency-Calculator
 pip install -r requirements.txt
 streamlit run main.py
 ```
+(I'm working on the python file - u can just start this file and all be installed)
