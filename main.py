@@ -50,23 +50,16 @@ enter_time()
 
 
 #  -----------------------------------------------------------------------------------------
-# Getting User-Agent of viewer (for separating bots and humans)
 def get_user_agent():
-    user_agent = streamlit_js_eval(
-        js_expressions="navigator.userAgent", key="getUserAgent"
-    )
-    logger.debug(f"User Agent: {user_agent or 'Unknown'}")
-    return user_agent or "Unknown"
+    if "user_agent" not in st.session_state:
+        st.session_state["user_agent"] = streamlit_js_eval(
+            js_expressions="navigator.userAgent", key="getUserAgent"
+        )
+        logger.debug(f"User Agent: {st.session_state['user_agent'] or 'Unknown'}")
+    return st.session_state["user_agent"] or "Unknown"
 
 
-if "user_agent" not in st.session_state:
-    st.session_state["user_agent"] = get_user_agent()
-
-if "show_logs" not in st.session_state:
-    st.session_state["show_logs"] = False
-
-
-get_user_agent()
+user_agent = get_user_agent()
 
 
 #  -----------------------------------------------------------------------------------------
