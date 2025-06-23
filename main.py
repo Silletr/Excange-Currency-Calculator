@@ -95,9 +95,10 @@ if st.button("📜 Show logs"):
         st.error("Log file not found")
     except Exception as e:
         st.error(f"Error reading log file: {str(e)}")
+    if st.button("Close logs"):
+        st.session_state.show_logs = False
 
-
-# -----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 # Call func with all currencies
 def convert_currency():
     """
