@@ -72,5 +72,5 @@ Just follow these steps:
 3. **After that, run the app with: python3 setup_n_run**
 ---
 Optional:
-**Before launching u can press Shift + C and go to the Excange-Currency-Calculator folder. From there **you can also start main.py** directly.
+**Before launching u can press Shift + C** and go to the Excange-Currency-Calculator folder. From there **you can also start main.py** directly.
 On Windows, feel free to **create a shortcut to main.py on your Desktop** for faster access
