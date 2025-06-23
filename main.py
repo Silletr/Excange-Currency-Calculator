@@ -38,7 +38,7 @@ component.html(
 
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
-@st.cache_resourse
+@st.cache_resource
 def enter_time():
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
