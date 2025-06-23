@@ -120,11 +120,12 @@ if st.button("Convert"):
     if "user_agent" not in st.session_state or not st.session_state["user_agent"]:
         user_agent = get_user_agent()
         st.session_state["user_agent"] = user_agent
-        logger.debug(f"User {st.session_state['user_agent'] } clicked Convert")
+    logger.debug(f"User {st.session_state['user_agent'] } clicked Convert")
     
     result = currency.convert(from_curr, to_curr, clean_amount)
 
     if result is not None:
         st.markdown(f"### 💰 {clean_amount} {from_curr} = **{result:.2f} {to_curr}**")
+        logger.debug(f"User {st.session_state['user_agent'] } it`s a real user")
     else:
         st.error("Conversion failed.")
