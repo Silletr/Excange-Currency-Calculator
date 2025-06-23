@@ -8,14 +8,14 @@ import streamlit.components.v1 as component
 from logger_config import logger
 from currencies.parse import Currency
 
-
-# Tasks:
+# TODO: See detailed tasks below
 #   1. Add Donate button (at: 08/23/2025)
 #   2. Optimizate code for better UX
-# Done:
+
+# DONE:
 # - [x] Optimizate code for better UX
 # --------------------------------------------------------------------------------
-# Page config and loading dotenv
+# Page config
 
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
 
