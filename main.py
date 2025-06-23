@@ -120,7 +120,7 @@ if st.button("Convert"):
     if "user_agent" not in st.session_state or not st.session_state["user_agent"]:
         user_agent = get_user_agent()
         st.session_state["user_agent"] = user_agent
-    logger.debug(f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', ''} clicked Convert")
+    logger.debug(f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', '')} clicked Convert")
     
     result = currency.convert(from_curr, to_curr, clean_amount)
 
