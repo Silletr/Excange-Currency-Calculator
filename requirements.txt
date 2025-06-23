@@ -1,8 +1,5 @@
 streamlit
 requests
-dotenv
 loguru
 pytz
 streamlit-js-eval
-# for streamlit upgrade pip
-pip
