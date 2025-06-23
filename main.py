@@ -81,17 +81,24 @@ component.html(
     height=0,
 )
 #  -----------------------------------------------------------------------------------------
+if "show_logs" not in st.session_state:
+    st.session_state.show_logs = False
+
 if st.button("📜 Show logs"):
+    st.session_state.show_logs = True
+
+if st.session_state.show_logs:
     try:
         with open("logs/site_log.log", "r", encoding="utf-8") as f:
             logs = f.read()
         st.text_area("Log file", logs, height=350)
-
     except FileNotFoundError:
         st.error("Log file not found")
     except Exception as e:
         st.error(f"Error reading log file: {str(e)}")
 
+    if st.button("Close logs"):
+        st.session_state.show_logs = False
 
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
