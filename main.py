@@ -69,6 +69,8 @@ def toggle_logs():
     st.session_state.show_logs = not st.session_state.show_logs
 
 
+toggle_logs()
+
 st.button(
     "📜 Show logs" if not st.session_state.show_logs else "📕 Hide logs",
     on_click=toggle_logs,
