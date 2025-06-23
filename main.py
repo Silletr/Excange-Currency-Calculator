@@ -126,6 +126,6 @@ if st.button("Convert"):
 
     if result is not None:
         st.markdown(f"### 💰 {clean_amount} {from_curr} = **{result:.2f} {to_curr}**")
-        logger.debug(f"User {st.session_state['user_agent'] } it`s a real user")
+        logger.debug(f"User {st.session_state['user_agent'].replace("Gecko/20100101 Firefox/139.0", "") } it`s a real user")
     else:
         st.error("Conversion failed.")
