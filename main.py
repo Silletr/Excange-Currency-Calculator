@@ -15,12 +15,8 @@ from currencies.parse import Currency
 # from donate import Donate
 
 # TODO: See detailed tasks below
-"""
-    1. Add Donate button (at: 08/23/2025)
-    2. Optimizate code for better UX
-FIXME:
-    1. ...
-"""
+#   1. Add Donate button (at: 08/23/2025)
+#   2. Optimizate code for better UX
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -101,7 +97,7 @@ if st.button("📜 Show logs"):
         st.session_state.show_logs = False
 
 
-# -----------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 # Call func with all currencies
 def convert_currency():
     """
