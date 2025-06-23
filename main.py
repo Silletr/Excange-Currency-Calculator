@@ -71,7 +71,6 @@ if "show_logs" not in st.session_state:
 
 def toggle_logs():
     st.session_state.show_logs = not st.session_state.show_logs
-    st.rerun()
 
 
 st.button(
