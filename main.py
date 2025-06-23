@@ -2,17 +2,25 @@
 import datetime as dt
 import time
 
-
 import streamlit as st
 import streamlit.components.v1 as component
+
 import pytz
 from streamlit_js_eval import streamlit_js_eval
+
 
 from logger_config import logger
 from currencies.parse import Currency
 
-from donate import Donate
+# from donate import Donate
 
+# TODO: See detailed tasks below
+"""
+    1. Add Donate button (at: 08/23/2025)
+    2. Optimizate code for better UX
+FIXME:
+    1. ...
+"""
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
 
@@ -22,6 +30,9 @@ page_config = st.set_page_config(page_title="Currency Calculator", page_icon="�
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
 def enter_time():
+    """
+    Getting the time when user entered to the site and save to log file
+    """
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
     current_datetime = f"{current_datetime.hour:02}:{current_datetime.minute:02}"
@@ -29,15 +40,20 @@ def enter_time():
 
 
 enter_time()
+
+
 #  -----------------------------------------------------------------------------------------
 # Getting User-Agent of viewer (for separating bots and humans)
-# Using best method - if stremalit cant give UA (User Agent) - just replacing it to "User-Agent is missing"
-
-
-def User_Agent():
-    # Taking user agent
+def get_user_agent():
+    """
+    Taking the user agent for separate real user from bot,
+    if streamlit_js_eval cant get the user agent on some reasons just returning the "User Agent is unknown"
+    """
     logger.info("Waiting for User-Agent")
-    time.sleep(2)
+    time.sleep(2.5)
+
+    # Store directly in session state
+    global user_agent
     user_agent = streamlit_js_eval(
         js_expressions="navigator.userAgent", key="getUserAgent"
     )
@@ -46,10 +62,11 @@ def User_Agent():
         st.session_state["user_agent"] = user_agent
         logger.debug(f"User Agent: {user_agent}")
     else:
-        logger.debug("User-Agent is missing. Maybe it`s a Bot.")
+        logger.debug("User-Agent is unknown.")
+        st.session_state["user_agent"] = "Unknown"
 
 
-User_Agent()
+get_user_agent()
 #  -----------------------------------------------------------------------------------------
 # Greetings
 st.markdown(
@@ -68,23 +85,25 @@ component.html(
     height=0,
 )
 #  -----------------------------------------------------------------------------------------
-if st.button("Check logs (for owner)"):
-    st.success("Hi, sir. Logs is done. ")
-    if st.button("📜 Show logs"):
-        try:
-            with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                logs = f.read()
-            st.text_area("Log file", logs, height=350)
+if st.button("📜 Show logs"):
+    try:
+        with open("logs/site_log.log", "r", encoding="utf-8") as f:
+            logs = f.read()
+        st.text_area("Log file", logs, height=350)
 
-        except FileNotFoundError:
-            st.error("Log file not found")
-        except Exception as e:
-            st.error(f"Error reading log file: {str(e)}")
+    except FileNotFoundError:
+        st.error("Log file not found")
+    except Exception as e:
+        st.error(f"Error reading log file: {str(e)}")
 
 
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 def convert_currency():
+    """
+    converting currency using the Ukrainian National Bank (list of supported currencies: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json),
+    saving result of operation on logs file, and returning result to user on format "amount {from_curr} -> amount {to_curr}"
+    """
     # Get currencies and handle potential errors
     result = Currency.get_supported_currencies()
 
@@ -114,8 +133,20 @@ def convert_currency():
         label="Enter amount", step=0.01, max_value=float(1_000_000_000)
     )
 
+    def log_user_agent():
+        """
+        Log user agent from session state when button is clicked
+        """
+        # Get user agent from session state
+        user_agent = st.session_state.get("user_agent", "Unknown")
+        logger.debug(f"User with {user_agent} - real user")
+
     # Converting currencies
-    if st.button("Check amount"):
+    if st.button("Check amount", on_click=log_user_agent):
+        logger.debug(f"User with {user_agent} - real user")
+        if "user-agent" not in st.session_state:
+            st.session_state["user-agent"] = f"{user_agent}"
+
         currency = Currency()
         clean_amount = abs(amount)
         result = currency.convert(
@@ -129,18 +160,11 @@ def convert_currency():
             st.error("Conversion failed.")
 
 
-#  -----------------------------------------------------------------------------------------
-"""
-logs for owner:
-"""
-if st.button("📜 Show logs"):
-    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-        logs = f.read()
-        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 convert_currency()
 # ------------------------------------------------------------------------------------------
-# Donate (for the future, ~3 month)
-don = Donate()
-don.donate()
+
+# # Donate (for the future, ~3 month)
+# don = Donate()
+# don.donate()
