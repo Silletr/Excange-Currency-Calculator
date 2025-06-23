@@ -52,12 +52,17 @@ enter_time()
 
 #  -----------------------------------------------------------------------------------------
 def get_user_agent():
-    if "user_agent" not in st.session_state:
-        st.session_state["user_agent"] = streamlit_js_eval(
-            js_expressions="navigator.userAgent", key="getUserAgent"
-        )
-        logger.debug(f"User Agent: {st.session_state['user_agent'] or 'Unknown'}")
-    return st.session_state["user_agent"] or "Unknown"
+    """
+    Getting the user agent for the future separating users and bots
+    """
+    if "user_agent" not in st.session_state or st.session_state["user_agent"] is None:
+        ua = streamlit_js_eval(js_expressions="navigator.userAgent", key="getUserAgent")
+        
+        st.session_state["user_agent"] = ua or "Unknown"
+        logger.debug(f"User Agent: {st.session_state['user_agent']}")
+        
+    return st.session_state["user_agent"]
+
 
 
 user_agent = get_user_agent()
@@ -83,8 +88,8 @@ if st.session_state.show_logs:
     try:
         with open("logs/site_log.log", "r", encoding="utf-8") as f:
             logs = f.readlines()
-        logs_to_show = "".join(logs[-300:])  # last 300 strings
-        st.text_area("Log file (last 300 lines)", logs_to_show, height=350)
+        logs_to_show = "".join(logs[-100:])  # last 300 strings
+        st.text_area("Log file (last 100 lines)", logs_to_show, height=250)
     except FileNotFoundError:
         st.error("Log file not found")
     except Exception as e:
@@ -110,8 +115,11 @@ amount = st.number_input("Amount", step=0.01, max_value=1_000_000_000.0)
 clean_amount = abs(amount)
 
 if st.button("Convert"):
+    if "user_agent" not in st.session_state or not st.session_state["user_agent"]:
+        user_agent = get_user_agent()
+        st.session_state["user_agent"] = user_agent
     logger.debug(f"User {st.session_state['user_agent']} clicked Convert")
-
+    
     result = currency.convert(from_curr, to_curr, clean_amount)
 
     if result is not None:
