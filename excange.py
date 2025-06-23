@@ -1,5 +1,6 @@
 import streamlit as st
-import requests
+from currencies.parse import Currency
+
 
 def convert_currency():
     # Get currencies and handle potential errors

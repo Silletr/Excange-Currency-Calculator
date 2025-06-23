@@ -68,18 +68,24 @@ component.html(
     height=0,
 )
 #  -----------------------------------------------------------------------------------------
-if st.button("Check logs (for owner)"):
-    st.success("Hi, sir. Logs is done. ")
-    if st.button("📜 Show logs"):
-        try:
-            with open("logs/site_log.log", "r", encoding="utf-8") as f:
-                logs = f.read()
-            st.text_area("Log file", logs, height=350)
+if "show_logs" not in st.session_state:
+    st.session_state.show_logs = False
 
-        except FileNotFoundError:
-            st.error("Log file not found")
-        except Exception as e:
-            st.error(f"Error reading log file: {str(e)}")
+if st.button("📜 Show logs"):
+    st.session_state.show_logs = True
+
+if st.session_state.show_logs:
+    try:
+        with open("logs/site_log.log", "r", encoding="utf-8") as f:
+            logs = f.read()
+        st.text_area("Log file", logs, height=350)
+    except FileNotFoundError:
+        st.error("Log file not found")
+    except Exception as e:
+        st.error(f"Error reading log file: {str(e)}")
+
+    if st.button("Close logs"):
+        st.session_state.show_logs = False
 
 
 # -----------------------------------------------------------------------------------------
@@ -125,22 +131,13 @@ def convert_currency():
             st.markdown(
                 f"### 💰 {clean_amount} {from_currency} = **{result:.2f} {to_currency}**"
             )
+            don = Donate()
+            don.donate()
         else:
             st.error("Conversion failed.")
 
 
-#  -----------------------------------------------------------------------------------------
-"""
-logs for owner:
-"""
-if st.button("📜 Show logs"):
-    with open("logs/site_log.log", "r", encoding="utf-8") as f:
-        logs = f.read()
-        st.text_area("Log file", logs, height=350)
 # -----------------------------------------------------------------------------------------
 # Call func with all currencies
 convert_currency()
 # ------------------------------------------------------------------------------------------
-# Donate (for the future, ~3 month)
-don = Donate()
-don.donate()
