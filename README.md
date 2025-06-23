@@ -70,4 +70,4 @@ Just:
 1. **Download the "setup_n_run.py", requirements.txt file**
 2. **Start "pip install -r requirements.txt"**
 3. **After downloading - start "python3 setup_n_run"**
-Before you can press the Shift + C, and go to "Exchange-Currency-Calculator" - from here start main.py (if u on windows - u can create the icon with path to main.py file and start from Desktop) 
+Before you can press the Shift + C, and go to "Exchange-Currency-Calculator" - from here start main.py (if u on Windows - u can create the icon with path to main.py file and start from Desktop) 
