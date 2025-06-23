@@ -12,7 +12,10 @@ from streamlit_js_eval import streamlit_js_eval
 from logger_config import logger
 from currencies.parse import Currency
 
-from donate import Donate
+# from donate import Donate  
+# TODO: 
+# 1. Add Donate button (3 months later, 08/23/2025)
+# 2. Optimizate code for better UX
 
 # --------------------------------------------------------------------------------
 # Page config and loading dotenv
