@@ -29,7 +29,7 @@ What you see:
 - Field for amount input  
 - Button to calculate  
 - Exchange result shown in `FROM → TO : AMOUNT` format  
-- Bonus: `View log` button — you can peek inside the log file if you're curious
+- Bonus: `Show Logs` button — you can peek inside the log file if you're curious
 
 ---
 
