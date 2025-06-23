@@ -74,6 +74,9 @@ def toggle_logs():
     st.rerun()
 
 
+st.button(
+    "📜 Show logs" if not st.session_state.show_logs else "📕 Hide logs",
+)
 if st.session_state.show_logs:
     try:
         with open("logs/site_log.log", "r", encoding="utf-8") as f:
