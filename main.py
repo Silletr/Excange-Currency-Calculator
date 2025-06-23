@@ -65,17 +65,11 @@ user_agent = get_user_agent()
 #  -----------------------------------------------------------------------------------------
 # Main functional
 #  -----------------------------------------------------------------------------------------
+if "show_logs" not in st.session_state:
+    st.session_state.show_logs = False
+
+
 def toggle_logs():
-    if "show_logs" not in st.session_state:
-        st.session_state.show_logs = False
-    st.session_state.show_logs = not st.session_state.show_logs
-
-
-toggle_logs()
-
-if st.button(
-    "📜 Show logs" if not st.session_state.show_logs else "📕 Hide logs",
-):
     st.session_state.show_logs = not st.session_state.show_logs
     st.rerun()
 
