@@ -4,8 +4,7 @@ import streamlit as st
 
 import pytz
 from streamlit_js_eval import streamlit_js_eval
-import streamlit.components as component
-
+import streamlit.components.v1 as component
 from logger_config import logger
 from currencies.parse import Currency
 
