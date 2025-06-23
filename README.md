@@ -1,31 +1,75 @@
-# Currencies Calculator
+# 💸 Currency Calculator
 
+> **Exchange or Excanger? Or Exchange?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
 
-**Currency Converter** (Or excanger, as u want) - thats [website](https://excange-currency.streamlit.app/) can help you to know how many u need give to bank for excange ur currency to nedeed
+🧮 **[Live Demo](https://excange-currency.streamlit.app/)**  
+📦 Built with Python + Streamlit  
+🔒 No API keys, no secrets, full privacy — everything comes from the **National Bank of Ukraine**!
+
 ---
 
+## 💡 How it works
 
-### 💡 How it works:
+1. **Pick your source currency** in the first dropdown (e.g., USD)
+2. **Pick the target currency** in the second dropdown (e.g., EUR)
+3. **Enter the amount**
+4. Hit **"Check amount"** — and boom 💥 — you'll get the result
 
-1. **Choose your currency** in the first dropdown
+🎯 Supports over **45 currencies**.
 
-2. **Choose the needed currency** in the second dropdown
-   *(you can also just type it in if you don't wanna scroll)*
-
-3. **Enter the amount**, and hit **"Check amount"**
-
-That's it! The converter will show how much you’ll get 🔁💰
 ---
-## 💻 Website UI:
+
+## 🖼 Website UI
+
 ![UI Screenshot](images/site_ui.png)
----
-Here we se:
-1. **3 Field**
-2. Choose first currency ("from currency", on this moment avaible 45 currencies)
-3.  Choose second currency in second field ("to currency")
-4. And result - result of exchange currency (for example USD -> EUR)
 
-5. Button "Check amount" - logically, if u press it - code calculate the required amount of currency
-6. And after click button - result in "from-to; Amount; Currency" format (amount of USD -> 15.00 -> 13.02 -> EUR)
-7. "Logs (For Owner)" - button where me (and u, if understand) i can watch logs of website
+What you see:
+
+- 2 dropdowns for selecting currencies  
+- Field for amount input  
+- Button to calculate  
+- Exchange result shown in `FROM → TO : AMOUNT` format  
+- Bonus: `View log` button — you can peek inside the log file if you're curious
+
 ---
+
+## 🔐 Security & Privacy
+
+- No tokens, no sensitive data — just clean code
+- Exchange rates pulled **directly from NBU (National Bank of Ukraine)** using JSON
+- Logs only include:
+  - Visit time
+  - User agent  
+- There's a visible "Logs" button so **you can see what gets logged**
+- `.env`, secret keys, and logs are **excluded from the repo and from deployments**
+
+---
+
+## 🛠 Tech Stack
+
+- Python 3.10+
+- Streamlit
+- `black`, `ruff`, `detect-secrets`, `pre-commit`
+- Modular code
+- Clean commits(not always, but..) (After some chaos in previous repository - commits is clear)
+
+---
+
+## 🧠 Fun Fact
+
+> In the early days, this project used a paid API with limits.  
+> But then… the **NBU appeared like a hero** and saved the day.  
+> Now it's 100% free, no auth, and more accurate.
+
+---
+
+## 👷 For Developers
+
+Wanna run it locally?
+
+```bash
+git clone https://github.com/Silletr/Excange-Currency-Calculator.git
+cd Excange-Currency-Calculator
+pip install -r requirements.txt
+streamlit run main.py
+```
