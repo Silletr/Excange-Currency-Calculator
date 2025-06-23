@@ -3,5 +3,3 @@ requests
 loguru
 pytz
 streamlit-js-eval
-# for streamlit upgrade pip, delete it on locally machine
-pip
