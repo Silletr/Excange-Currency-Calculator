@@ -12,8 +12,6 @@ from streamlit_js_eval import streamlit_js_eval
 from logger_config import logger
 from currencies.parse import Currency
 
-# from donate import Donate
-
 # TODO: See detailed tasks below
 """
     1. Add Donate button (at: 08/23/2025)
