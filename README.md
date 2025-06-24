@@ -2,7 +2,7 @@
 
 > **Exchange or Excanger? Or Exchange?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
 
-🧮 **[Live Demo](https://excange-currency.streamlit.app/)**  
+🧮 **[See it Live](https://excange-currency.streamlit.app/)**  
 📦 Built with Python + Streamlit  
 🔒 No API keys, no secrets, full privacy — everything comes from the **National Bank of Ukraine**!
 
