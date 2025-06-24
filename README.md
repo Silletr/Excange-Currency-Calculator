@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org)
 [![Streamlit](https://img.shields.io/badge/made%20with-Streamlit-red)](https://streamlit.io)
 
-> **Exchange or Excanger? Or Exchange?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
+> **Exchanger or Excanger?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
 
 🧮 **[See it Live](https://excange-currency.streamlit.app/)**  
 📦 Built with Python + Streamlit  
