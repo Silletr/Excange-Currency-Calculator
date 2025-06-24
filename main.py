@@ -9,15 +9,16 @@ from streamlit_js_eval import streamlit_js_eval
 import streamlit.components.v1 as component
 from logger_config import logger
 from currencies.parse import Currency
-
+# --------------------------------------------------------------------------------
 # TODO list:
 #     Timely empty
+
+
 # DONE:
 # - [x] Optimizate code for better UX
 # - [] Add donate button (at 08/23/2025
 # --------------------------------------------------------------------------------
 # Page config
-
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
 
 #  -----------------------------------------------------------------------------------------
@@ -41,6 +42,10 @@ component.html(
 # -------------------------------------------------------------------
 # Tracking time of enter to the site
 def enter_time():
+    """
+    Get the user`s login time
+    """
+    
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
 
@@ -49,8 +54,6 @@ def enter_time():
 
 
 enter_time()
-
-
 #  -----------------------------------------------------------------------------------------
 def get_user_agent():
     """
