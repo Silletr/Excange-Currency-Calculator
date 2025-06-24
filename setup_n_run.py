@@ -1,7 +1,6 @@
 import os
 import sys
 import subprocess
-import platform
 from logger_config import logger
 
 REPO_URL = "https://github.com/Silletr/Excange-Currency-Calculator.git"
@@ -17,10 +16,6 @@ def run_command(cmd, cwd=None):
 
 
 def main():
-    # Set the Operational system
-    system = platform.system()
-    logger.info(f" Detected OS: {system}")
-
     # Clone repo if not exist
     if not os.path.isdir(REPO_DIR):
         logger.info("Cloning repository...")
