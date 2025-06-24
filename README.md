@@ -1,8 +1,11 @@
 # 💸 Currency Calculator
 
-> **Exchange or Excanger? Or Exchange?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
+[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org)
+[![Streamlit](https://img.shields.io/badge/made%20with-Streamlit-red)](https://streamlit.io)
 
-🧮 **[Live Demo](https://excange-currency.streamlit.app/)**  
+> **Exchanger or Excanger?** Doesn't matter — this site will help you figure out **how much money to give the bank** when exchanging one currency for another.
+
+🧮 **[See it Live](https://excange-currency.streamlit.app/)**  
 📦 Built with Python + Streamlit  
 🔒 No API keys, no secrets, full privacy — everything comes from the **National Bank of Ukraine**!
 
@@ -66,8 +69,11 @@ What you see:
 ## 👷 For Developers
 
 Wanna run it locally?
-Just:
-1. **Download the "setup_n_run.py", requirements.txt file**
-2. **Start "pip install -r requirements.txt"**
-3. **After downloading - start "python3 setup_n_run"**
-Before you can press the Shift + C, and go to "Exchange-Currency-Calculator" - from here start main.py (if u on Windows - u can create the icon with path to main.py file and start from Desktop) 
+Just follow these steps:
+1. **Download the "setup_n_run.py" and requirements.txt**
+2. **Run "pip install -r requirements.txt"**
+3. **After that, run the app with: python3 setup_n_run**
+---
+Optional:
+**Before launching u can press Shift + C** and go to the Excange-Currency-Calculator folder. From there **you can also start main.py** directly.
+On Windows, feel free to **create a shortcut to main.py on your Desktop** for faster access
