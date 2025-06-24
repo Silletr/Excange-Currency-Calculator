@@ -1,7 +1,7 @@
 # Imports
 import datetime as dt
 import streamlit as st
-import time 
+import time
 
 
 import pytz
@@ -9,14 +9,15 @@ from streamlit_js_eval import streamlit_js_eval
 import streamlit.components.v1 as component
 from logger_config import logger
 from currencies.parse import Currency
+
 # --------------------------------------------------------------------------------
-# TODO list:
+# to-do:
 #     Timely empty
 
 
 # DONE:
 # - [x] Optimizate code for better UX
-# - [] Add donate button (at 08/23/2025
+# - [08/23/2025] Add donate button (at 08/23/2025)
 # --------------------------------------------------------------------------------
 # Page config
 page_config = st.set_page_config(page_title="Currency Calculator", page_icon="💱")
@@ -45,7 +46,7 @@ def enter_time():
     """
     Get the user`s login time
     """
-    
+
     timezone = pytz.timezone("Europe/Kiev")
     current_datetime = dt.datetime.now(timezone)
 
@@ -54,6 +55,8 @@ def enter_time():
 
 
 enter_time()
+
+
 #  -----------------------------------------------------------------------------------------
 def get_user_agent():
     """
@@ -64,9 +67,8 @@ def get_user_agent():
         time.sleep(1.5)
         st.session_state["user_agent"] = ua or "Unknown"
         logger.debug(f"User Agent: {st.session_state['user_agent']}")
-        
-    return st.session_state["user_agent"]
 
+    return st.session_state["user_agent"]
 
 
 user_agent = get_user_agent()
@@ -122,12 +124,16 @@ if st.button("Convert"):
     if "user_agent" not in st.session_state or not st.session_state["user_agent"]:
         user_agent = get_user_agent()
         st.session_state["user_agent"] = user_agent
-    logger.debug(f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', '')} clicked Convert")
-    
+    logger.debug(
+        f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', '')} clicked Convert"
+    )
+
     result = currency.convert(from_curr, to_curr, clean_amount)
 
     if result is not None:
         st.markdown(f"### 💰 {clean_amount} {from_curr} = **{result:.2f} {to_curr}**")
-        logger.debug(f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', '')} it`s a real user")
+        logger.debug(
+            f"User {st.session_state['user_agent'].replace('Gecko/20100101 Firefox/139.0', '')} it`s a real user"
+        )
     else:
         st.error("Conversion failed.")
